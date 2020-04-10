@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.scss';
+
+function getColorRamdom() {
+  var list_color = ["deeppink", "green", "yellow", "black", "blue"];
+  var ramdomcolor = Math.trunc(Math.random() * 5);
+  return list_color[ramdomcolor];
+}
 
 function App() {
+
+  const [color, setColor] = useState(() => {
+    var initial = localStorage.getItem('color_box') || "green";
+    return initial;
+  });
+
+  function onClickHandle() {
+    var getColor = getColorRamdom();
+    setColor(getColor);
+    localStorage.setItem("color_box", getColor);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="retagel1" onClick={onClickHandle}></div>
+      <div className="retagel2" style={{ backgroundColor: color }}></div>
     </div>
   );
 }

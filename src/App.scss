@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+  width: 250px;
+  height: 250px;
+  margin: auto;
+}
+.retagel1 {
+  $border-box: 100px;
+
+  background-color: deeppink;
+  width: $border-box;
+  height: $border-box;
+  margin-top: 10px;
+  float: left;
+  margin-left: 20px;
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.retagel2 {
+  $border-box: 100px;
+
+  width: $border-box;
+  height: $border-box;
+  margin-top: 10px;
+  float: left;
+  margin-left: 20px;
+  border-radius: 8px;
+
+  transition: all 0.1 ease-in-out 0s;
+}
