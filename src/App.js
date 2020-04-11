@@ -1,29 +1,35 @@
 import React, { useState } from 'react';
 import './App.scss';
-
-function getColorRamdom() {
-  var list_color = ["deeppink", "green", "yellow", "black", "blue"];
-  var ramdomcolor = Math.trunc(Math.random() * 5);
-  return list_color[ramdomcolor];
-}
+import Todolist from './components/TodoList';
+import TodoForm from './components/TodoForm';
 
 function App() {
+  const [todolist, settodolist] = useState([
+    { id: 1, title: "play game" },
+    { id: 2, title: "play music" },
+    { id: 3, title: "do homework" }
+  ]);
 
-  const [color, setColor] = useState(() => {
-    var initial = localStorage.getItem('color_box') || "green";
-    return initial;
-  });
+  function HandleClickItem(param) {
+    var newlisttodo = [...todolist];
+    var index = todolist.findIndex(x => x.id === param.id);
+    if (index < 0) return;
+    newlisttodo.splice(index, 1);
+    settodolist(newlisttodo);
+  }
 
-  function onClickHandle() {
-    var getColor = getColorRamdom();
-    setColor(getColor);
-    localStorage.setItem("color_box", getColor);
+  function HandleTodoFormSubmit(formValue) {
+    var newtodolist = [...todolist];
+    var obj = { id: newtodolist.length + 1, ...formValue };
+
+    newtodolist.push(obj);
+    settodolist(newtodolist);
   }
 
   return (
     <div className="App">
-      <div className="retagel1" onClick={onClickHandle}></div>
-      <div className="retagel2" style={{ backgroundColor: color }}></div>
+      <TodoForm onSubmit={HandleTodoFormSubmit} />
+      <Todolist todo={todolist} clickItem={HandleClickItem} />
     </div>
   );
 }
